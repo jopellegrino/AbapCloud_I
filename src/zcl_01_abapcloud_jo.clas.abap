@@ -1,14 +1,13 @@
-CLASS zcl_01_abapcloud_jo DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZCL_01_ABAPCLOUD_JO definition
+  public
+  create private .
 
-  PUBLIC SECTION.
-  PROTECTED SECTION.
-  PRIVATE SECTION.
+public section.
+protected section.
+private section.
 ENDCLASS.
 
 
 
-CLASS zcl_01_abapcloud_jo IMPLEMENTATION.
+CLASS ZCL_01_ABAPCLOUD_JO IMPLEMENTATION.
 ENDCLASS.

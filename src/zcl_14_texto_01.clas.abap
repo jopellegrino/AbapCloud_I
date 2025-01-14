@@ -101,7 +101,43 @@ CLASS zcl_14_texto_01 IMPLEMENTATION.
     out->write( |  | ).
     out->write( |  | ).
 
-    "FUNCIONES DE PREDICADO (DEVUELVE UN BOOLEANO EVALUANDO PATRONES)
+    "FUNCIONES DE CONTENIDO (DEVUELVE UN BOOLEANO EVALUANDO PATRONES)
+
+    "Contains
+    DATA: lv_text3   TYPE string VALUE 'The Employee number is: 123-456-7890',
+          lv_pattern TYPE string VALUE `\d{3}-\d{3}-\d{4}`.                       "EXPRESION REGULAR (PATRON DE PHONE NUMBER)
+
+    IF contains( val = lv_text3 pcre = lv_pattern ). "A PCRE PUEDES PASARLE LA EXPRESION REGULAR (PATRONES PCRE)
+      out->write( 'The text contains a phone number' ).
+    ELSE.
+      out->write( 'The text does not contains a phone number' ).
+
+    ENDIF.
+
+    "MATCH (SOLO FUNCIONA CON PCRE Y DEVUELVE LA CADENA ENCONTRADA (A DIFERENCIA DE FIND QUE DEVUELVE LA POSICION)
+    DATA(lv_number) = match( val = lv_text3 pcre = lv_pattern occ = 1 ).        "DEVUELVE EL TEXTO QUE COINCIDE CON EL PATRON Y EL OCC ES LA OCURRENCIA
+    out->write( |El numero de telefono es: { lv_number }| ).
+
+    "LA FUNCION MATCHES DEVUELVE UN BOOLEANO
+
+    "REGULAR EXPRESIONS
+
+    DATA: lv_correo         TYPE string VALUE 'Please contact us at support@logali.com for more information',
+          lv_pattern_correo TYPE string VALUE  `\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b`. "REGEX FOR A EMAIL
+
+    IF contains( val = lv_correo pcre = lv_pattern_correo ). "SI EXISTE O NO LA COINCIDENCIA
+      out->write( 'The text contains an email adress' ).
+
+      DATA(LV_COUNT) = count( val = lv_correo pcre = lv_pattern_correo ). "CANTIDAD DE VECES QUE SE REPIRE LA COINCIDENCIA
+      out->write( | El numero de patrones es: { lv_count } | ).
+
+      data(lv_pos) = find( val = lv_correo pcre = lv_pattern_correo occ = 1 ). "LA POSICION DONDE SE ENCUENTRA LA COINCIDENCIA PRIMERA (OCC:1)
+      out->write( | La posicion del patron es : { lv_pos } | ).
+
+    ELSE.
+      out->write( 'The text does not contains an email adress' ).
+    ENDIF.
+
 
 
   ENDMETHOD.
