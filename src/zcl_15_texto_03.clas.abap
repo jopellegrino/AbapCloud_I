@@ -21,7 +21,7 @@ CLASS zcl_15_texto_03 IMPLEMENTATION.
     """""""""OVERLAY""""""""""
     out->write( |OVERLAY| ).
 
-    DATA(LV_name) = 'Abap_Class                     '.
+    DATA(LV_name) = 'Abap_Class                     '.                             "LA SUPERPOSICION NO LA HACE SOBRE LETRAS Y LA PRIMERA VARIABLE SE CONSERVA (DEBES COLOCAR ESPACIOS)
     DATA(lv_company) = '--------------->logali Group'.
 
 
@@ -90,7 +90,7 @@ CLASS zcl_15_texto_03 IMPLEMENTATION.
     DATA(lv_find) = find( val = lv_string_c regex = lv_regex ).           "DEVUELVE LA 1ERA POSIC. DEL 1ER PATRON (UN NUMERO EN REGEX).
     out->write( |Posicion de la coinc. con Regex y Find:      { lv_find } | ).
 
-    FIND ALL OCCURRENCES OF '#' IN lv_string_c MATCH COUNT DATA(lv_count). "DEVUELVE EL NUMERO DE OCURRENCIAS DE UN PATRON EN UN STRING (OPERADOR)
+    FIND ALL OCCURRENCES OF '#' IN lv_string_c MATCH COUNT DATA(lv_count) IGNORING CASE. "DEVUELVE EL NUMERO DE OCURRENCIAS DE UN PATRON EN UN STRING (OPERADOR) ignorando el case
     out->write( |Operador Num. de ocurrencias de un patron:   { lv_count } | ).
 
     lv_count = count( val = lv_string_c sub = '#' ).                       "DEVUELVE EL NUMERO DE OCURRENCIAS DE UN PATRON EN UN STRING (FUNCION)
@@ -98,7 +98,7 @@ CLASS zcl_15_texto_03 IMPLEMENTATION.
 
     out->write( |  | ).
 
-    """"""""""REPLACE"""""""""""SYSUBRC
+    """"""""""REPLACE"""""""""""VARIABLE EN TIEMPO DE EJEC. SYSUBRC = 0 (QUIERE DECIR QUE LOS CARAC. SE REEMPLAZA. CORRECTAMENTE ) SI ES DIF A CERO NO SE HIZO CORRECTAMENTE
     out->write( |REPLACE| ).
 
     DATA(lv_replace) = 'Logali-Group-SAP-Academy'.
@@ -122,6 +122,7 @@ CLASS zcl_15_texto_03 IMPLEMENTATION.
     lv_replace = 'Logali-Group-SAP-Academy'.
     lv_replace = replace( val = lv_replace with = '#' off = 5 LEN = 3 ).              "OFF = DESDE QUE POS. SE QUIERE REEMPLAZAR Y LEN = QUE TANTOS CARAC. QUE QUIERES REEMP.
     out->write( |Texto con todos simbolos (Oper.) Replace (2):  { lv_replace } | ).   "REEMPLAZO DESDE EL 5 TOMANDO LOS TRES CARAC. (I-G)
+
 
 
 
